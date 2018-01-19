@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.metallicdonkey.tcp.citizenArea.CitizenAreaCtrl">
+<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.metallicdonkey.tcp4citizens.info.CitizenAreaCtrl">
    <children>
       <Pane prefHeight="500.0" prefWidth="870.0" style="-fx-background-color: #d3d8d8;">
          <children>
@@ -16,7 +16,7 @@
                <graphic>
                   <ImageView fitHeight="149.0" fitWidth="194.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icons/il.png" />
+                        <Image url="@../../tcp/icons/il.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -31,7 +31,7 @@
                <graphic>
                   <ImageView fitHeight="135.0" fitWidth="198.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icons/ip.png" />
+                        <Image url="@../../tcp/icons/ip.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -43,7 +43,7 @@
                <graphic>
                   <ImageView fitHeight="146.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icons/if.png" />
+                        <Image url="@../../tcp/icons/if.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -53,7 +53,7 @@
             </Button>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="360.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../icons/logo.png" />
+                  <Image url="@../../tcp/icons/logo.png" />
                </image>
             </ImageView>
          </children>
