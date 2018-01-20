@@ -250,4 +250,20 @@ public class DBHelperLine {
 		result = dbm.executeUpdate("DELETE FROM tcp.line WHERE idLine='"+l.getName()+"'");
 		return result;
 	}
+
+	public List<Line> getPath(Stop start, Stop end) throws SQLException {
+		List<Line> path = new ArrayList<>();
+		int id1 = getIdStop(start.getAddress());
+		int id2 = getIdStop(end.getAddress());
+		String query = "SELECT DISTINCT ls.Stop_idStop, ls.Line_idLine FROM tcp.stop s, tcp.line l, tcp.line_has_stop ls " + 
+				"WHERE l.idLine = ls.Line_idLine AND s.idStop = ls.Stop_idStop " + 
+				"AND ls.Stop_idStop = " + id1 + " OR ls.Stop_idStop = " + id2 + " "+
+				"GROUP BY ls.Stop_idStop;";
+			
+		ResultSet result = dbm.executeQuery(query);
+		while(result.next()) {
+			path.add(getLineById(result.getInt("Line_idLine")+"") );
+		}
+		return path;
+	}
 }
