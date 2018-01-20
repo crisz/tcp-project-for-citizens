@@ -3,8 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,11 +10,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.metallicdonkey.tcp4citizens.info.InfoLineCtrl">
+<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.metallicdonkey.tcp4citizens.info.InfoPathCtrl">
    <children>
       <Pane prefHeight="500.0" prefWidth="870.0" style="-fx-background-color: #d3d8d8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="CENTER" layoutX="327.0" layoutY="25.0" text="Seleziona una linea">
+            <Label alignment="CENTER" layoutX="338.0" layoutY="24.0" text="Informazioni percorso">
                <font>
                   <Font size="20.0" />
                </font></Label>
@@ -25,16 +23,15 @@
                   <Image url="@../../tcp/icons/logo.png" />
                </image>
             </ImageView>
-            <TextField fx:id="filter" layoutX="161.0" layoutY="67.0" prefHeight="45.0" prefWidth="500.0" />
-            <Button layoutX="281.0" layoutY="126.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="260.0" text="Cerca" />
-            <ListView layoutX="62.0" layoutY="184.0" prefHeight="295.0" prefWidth="731.0" />
-            <TableView fx:id="lines" layoutX="53.0" layoutY="184.0" prefHeight="295.0" prefWidth="750.0">
-              <columns>
-                <TableColumn fx:id="nameColumn" prefWidth="150.0" text="Linea" />
-                <TableColumn fx:id="startTerminalColumn" prefWidth="300.0" text="Capolinea di Partenza" />
-                  <TableColumn fx:id="endTerminalColumn" prefWidth="300.0" text="Capolinea di Arrivo" />
-              </columns>
-            </TableView>
+            <Label layoutX="14.0" layoutY="82.0" text="Partenza" />
+            <TextField fx:id="startField" layoutX="95.0" layoutY="78.0" />
+            <Label layoutX="338.0" layoutY="82.0" text="Arrivo" />
+            <TextField fx:id="endField" layoutX="419.0" layoutY="78.0" />
+            <ListView fx:id="linesList" layoutX="69.0" layoutY="224.0" prefHeight="200.0" prefWidth="200.0" />
+            <Label layoutX="155.0" layoutY="165.0" text="Linee" />
+            <ListView fx:id="pathList" layoutX="393.0" layoutY="224.0" prefHeight="200.0" prefWidth="200.0" />
+            <Label layoutX="470.0" layoutY="174.0" text="Percorso" />
+            <Button layoutX="593.0" layoutY="78.0" mnemonicParsing="false" onAction="#onCalcClicked" text="Calcola" />
          </children>
       </Pane>
    </children>
