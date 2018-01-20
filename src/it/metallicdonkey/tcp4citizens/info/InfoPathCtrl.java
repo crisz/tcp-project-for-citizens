@@ -18,10 +18,10 @@ import javafx.scene.control.TextField;
 
 public class InfoPathCtrl {
 	private App mainApp;
-	
+
 	@FXML
 	Button calcButton;
-	
+
 	@FXML
 	TextField startField;
 	@FXML
@@ -33,18 +33,18 @@ public class InfoPathCtrl {
 
 	@FXML
 	private void initialize() {
-	 
+
 	}
-	
+
 	@FXML
 	private void onCalcClicked() {
 		Alert error = check();
-		
+
 		if(error != null) {
 			error.showAndWait();
 			return;
 		}
-		
+
 		if (areStopsOk()) {
 			// TODO calculate path
 		}
@@ -56,7 +56,7 @@ public class InfoPathCtrl {
 		    alert.setContentText("Le fermate inserite non esistono");
 		}
 	}
-	
+
 	private boolean areStopsOk() {
 		Stop start = new Stop(startField.getText());
 		Stop end = new Stop(endField.getText());
@@ -74,23 +74,23 @@ public class InfoPathCtrl {
 		}
 		return (allStops.contains(start) && allStops.contains(end));
 	}
-	
+
 	private Alert check() {
 		Alert alert = new Alert(AlertType.WARNING);
 	    alert.initOwner(mainApp.getPrimaryStage());
 	    alert.setTitle("Avviso");
 	    alert.setHeaderText("Calcolo percorso fallito");
-	    
+
 		if(startField.getText().equals("")) {
 			alert.setContentText("Inserisci una fermata di partenza");
 			return alert;
 		}
-		
+
 		if(endField.getText().equals("")) {
 			alert.setContentText("Inserisci una fermata di arrivo");
 			return alert;
 		}
-		
+
 		// If it's all ok
 		return null;
 	}
