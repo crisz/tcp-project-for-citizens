@@ -54,4 +54,9 @@ public class Line {
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
+	
+	@Override
+	public String toString() {
+		return name;
+	}
 }

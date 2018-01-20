@@ -2,6 +2,9 @@ package it.metallicdonkey.tcp4citizens.info;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 
 import com.mysql.fabric.jdbc.ErrorReportingExceptionInterceptor;
 
@@ -9,6 +12,7 @@ import it.metallicdonkey.tcp.db.DBHelperLine;
 import it.metallicdonkey.tcp.models.Line;
 import it.metallicdonkey.tcp.models.Stop;
 import it.metallicdonkey.tcp4citizens.App;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -18,10 +22,11 @@ import javafx.scene.control.TextField;
 
 public class InfoPathCtrl {
 	private App mainApp;
+	private Stop start;
+	private Stop end;
 	
 	@FXML
 	Button calcButton;
-	
 	@FXML
 	TextField startField;
 	@FXML
@@ -46,7 +51,41 @@ public class InfoPathCtrl {
 		}
 		
 		if (areStopsOk()) {
-			// TODO calculate path
+			List<Line>lines = null;
+			try {
+				lines = DBHelperLine.getInstance().getPath(start, end);
+			}
+			catch (SQLException e) {
+				Alert alert = new Alert(AlertType.WARNING);
+			    alert.initOwner(mainApp.getPrimaryStage());
+			    alert.setTitle("Avviso");
+			    alert.setHeaderText("Connessione non disponibile");
+			    alert.setContentText("Controlla la connessione e riprova");
+				e.printStackTrace();
+				return;
+			}
+			
+			if(lines.isEmpty()) {
+				pathList.setItems(FXCollections.observableArrayList("Nessun percorso"));
+			}
+			
+			// Check if there's a single Line linking the Stops
+			if(lines.get(0).getName().equals(lines.get(1).getName())) {
+				linesList.setItems(FXCollections.observableArrayList(lines.get(0)));
+				String path = lines.get(0).getName() + " da: " + start.getAddress() + " a: " + end.getAddress();
+				pathList.setItems(FXCollections.observableArrayList(path));
+			}
+			else {	// Multi line path
+				ArrayList<String> path = new ArrayList<>(); 
+				for(Line l: lines) {
+					path.add(l.getName());
+				}
+				pathList.setItems(FXCollections.observableArrayList(path));
+				linesList.setItems(FXCollections.observableArrayList(lines));
+			}
+			linesList.refresh();
+			pathList.refresh();
+			
 		}
 		else {
 			Alert alert = new Alert(AlertType.WARNING);
@@ -58,8 +97,8 @@ public class InfoPathCtrl {
 	}
 	
 	private boolean areStopsOk() {
-		Stop start = new Stop(startField.getText());
-		Stop end = new Stop(endField.getText());
+		start = new Stop(startField.getText());
+		end = new Stop(endField.getText());
 		ArrayList<Stop> allStops = null;
 		try {
 			allStops = DBHelperLine.getInstance().getAllStopsArray();
@@ -72,7 +111,18 @@ public class InfoPathCtrl {
 		    alert.setContentText("Controlla la connessione e riprova");
 			return false;
 		}
-		return (allStops.contains(start) && allStops.contains(end));
+		boolean s1 = false, s2 = false, retval;
+		for(Stop s: allStops) {
+			if (s.getAddress().equals(start.getAddress())) {
+				s1 = true;
+			}
+			if(s.getAddress().equals(end.getAddress())) {
+				s2 = true;
+			}
+		}
+		retval = s1 && s2;
+		System.out.println("VALID STOPS: " + retval);
+		return retval;
 	}
 	
 	private Alert check() {
