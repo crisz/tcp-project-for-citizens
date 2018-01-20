@@ -22,24 +22,18 @@ import javafx.scene.control.TextField;
 
 public class InfoPathCtrl {
 	private App mainApp;
-<<<<<<< HEAD
 
-	@FXML
-	Button calcButton;
-
-=======
 	private Stop start;
 	private Stop end;
-	
+
 	@FXML
 	Button calcButton;
->>>>>>> 06a74a13e6b3a1b151bc8ecec382270f45887da1
 	@FXML
 	TextField startField;
 	@FXML
 	TextField endField;
 	@FXML
-	ListView<Line> linesList;
+	ListView<String> linesList;
 	@FXML
 	ListView<String> pathList;
 
@@ -53,7 +47,7 @@ public class InfoPathCtrl {
 		// Clear ListViews
 		linesList.setItems(FXCollections.observableArrayList());
 		pathList.setItems(FXCollections.observableArrayList());
-		
+
 		Alert error = check();
 
 		if(error != null) {
@@ -76,28 +70,49 @@ public class InfoPathCtrl {
 				e.printStackTrace();
 				return;
 			}
-			
+
 			if(lines.isEmpty()) {
 				pathList.setItems(FXCollections.observableArrayList("Nessun percorso"));
 			}
-			
+
 			// Check if there's a single Line linking the Stops
 			else if(lines.get(0).getName().equals(lines.get(1).getName())) {
-				linesList.setItems(FXCollections.observableArrayList(lines.get(0)));
+				linesList.setItems(FXCollections.observableArrayList(lines.get(0).getName()));
 				String path = "LINEA: "+  lines.get(0).getName() + " DA: " + start.getAddress() + " A: " + end.getAddress();
 				pathList.setItems(FXCollections.observableArrayList(path));
 			}
 			else {	// Multi line path
-				ArrayList<String> path = new ArrayList<>(); 
-				for(Line l: lines) {
-					path.add("LINEA: " +l.getName());
+				try {
+					ArrayList<String> path = new ArrayList<>();
+					ArrayList<String> linesArrayList = new ArrayList<>();
+					for(Line l: lines) {
+						linesArrayList.add(l.getName());
+						Stop startStop = DBHelperLine.getInstance().getTerminal(l, true);
+						ArrayList<Stop> stopsGoing = DBHelperLine.getInstance().getStops(l, true);
+						ArrayList<Stop> stopsRet = DBHelperLine.getInstance().getStops(l, false);
+						Stop endStop = DBHelperLine.getInstance().getTerminal(l, false);
+						String stringa = ": ";
+						stringa += startStop.getAddress().toUpperCase() + "; ";
+						for(int i=0; i<stopsGoing.size(); i++) {
+							stringa += stopsGoing.get(i).getAddress() + "; ";
+						}
+						stringa += endStop.getAddress().toUpperCase() + "; ";
+						for(int i=0; i<stopsRet.size(); i++) {
+							stringa += stopsRet.get(i).getAddress() + "; ";
+						}
+						stringa += startStop.getAddress().toUpperCase() + ".";
+						path.add("LINEA " + l.getName() + stringa);
+					}
+					pathList.setItems(FXCollections.observableArrayList(path));
+					linesList.setItems(FXCollections.observableArrayList(linesArrayList));
+				} catch (SQLException exc) {
+					exc.printStackTrace();
 				}
-				pathList.setItems(FXCollections.observableArrayList(path));
-				linesList.setItems(FXCollections.observableArrayList(lines));
+
 			}
 			linesList.refresh();
 			pathList.refresh();
-			
+
 		}
 		else {
 			Alert alert = new Alert(AlertType.WARNING);

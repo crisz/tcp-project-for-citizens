@@ -255,14 +255,17 @@ public class DBHelperLine {
 		List<Line> path = new ArrayList<>();
 		int id1 = getIdStop(start.getAddress());
 		int id2 = getIdStop(end.getAddress());
-		String query = "SELECT DISTINCT ls.Stop_idStop, ls.Line_idLine FROM tcp.stop s, tcp.line l, tcp.line_has_stop ls " + 
-				"WHERE l.idLine = ls.Line_idLine AND s.idStop = ls.Stop_idStop " + 
-				"AND ls.Stop_idStop = " + id1 + " OR ls.Stop_idStop = " + id2 + " "+
-				"GROUP BY ls.Stop_idStop;";
-			
+		String query = "SELECT DISTINCT l.idLine FROM tcp.line l, tcp.line_has_stop ls1, tcp.line_has_stop ls2, tcp.stop s1, tcp.stop s2 " +
+				"WHERE s1.idStop='"+id1+"' AND s1.idStop=ls1.Stop_idStop AND l.idLine=ls1.Line_idLine "+
+				"AND s2.idStop='"+id2+"' AND s2.idStop=ls2.Stop_idStop AND l.idLine=ls2.Line_idLine "+
+				"ORDER BY l.idLine";
+/*		SELECT DISTINCT l.idLine FROM tcp.line l, tcp.line_has_stop ls1, tcp.line_has_stop ls2, tcp.stop s1, tcp.stop s2
+		WHERE s1.address='Stazione Centrale' AND s1.idStop=ls1.Stop_idStop AND l.idLine=ls1.Line_idLine
+		AND s2.address='Stadio Renzo Barbera' AND s2.idStop=ls2.Stop_idStop AND l.idLine=ls2.Line_idLine;
+*/
 		ResultSet result = dbm.executeQuery(query);
 		while(result.next()) {
-			path.add(getLineById(result.getInt("Line_idLine")+"") );
+			path.add(getLineById(result.getInt("l.idLine")+"") );
 		}
 		return path;
 	}
