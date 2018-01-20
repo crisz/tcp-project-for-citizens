@@ -43,6 +43,10 @@ public class InfoPathCtrl {
 	
 	@FXML
 	private void onCalcClicked() {
+		// Clear ListViews
+		linesList.setItems(FXCollections.observableArrayList());
+		pathList.setItems(FXCollections.observableArrayList());
+		
 		Alert error = check();
 		
 		if(error != null) {
@@ -61,6 +65,7 @@ public class InfoPathCtrl {
 			    alert.setTitle("Avviso");
 			    alert.setHeaderText("Connessione non disponibile");
 			    alert.setContentText("Controlla la connessione e riprova");
+			    alert.showAndWait();
 				e.printStackTrace();
 				return;
 			}
@@ -70,15 +75,15 @@ public class InfoPathCtrl {
 			}
 			
 			// Check if there's a single Line linking the Stops
-			if(lines.get(0).getName().equals(lines.get(1).getName())) {
+			else if(lines.get(0).getName().equals(lines.get(1).getName())) {
 				linesList.setItems(FXCollections.observableArrayList(lines.get(0)));
-				String path = lines.get(0).getName() + " da: " + start.getAddress() + " a: " + end.getAddress();
+				String path = "LINEA: "+  lines.get(0).getName() + " DA: " + start.getAddress() + " A: " + end.getAddress();
 				pathList.setItems(FXCollections.observableArrayList(path));
 			}
 			else {	// Multi line path
 				ArrayList<String> path = new ArrayList<>(); 
 				for(Line l: lines) {
-					path.add(l.getName());
+					path.add("LINEA: " +l.getName());
 				}
 				pathList.setItems(FXCollections.observableArrayList(path));
 				linesList.setItems(FXCollections.observableArrayList(lines));
@@ -93,6 +98,7 @@ public class InfoPathCtrl {
 		    alert.setTitle("Avviso");
 		    alert.setHeaderText("Calcolo percorso fallito");
 		    alert.setContentText("Le fermate inserite non esistono");
+		    alert.showAndWait();
 		}
 	}
 	
@@ -109,6 +115,7 @@ public class InfoPathCtrl {
 		    alert.setTitle("Avviso");
 		    alert.setHeaderText("Connessione non disponibile");
 		    alert.setContentText("Controlla la connessione e riprova");
+		    alert.showAndWait();
 			return false;
 		}
 		boolean s1 = false, s2 = false, retval;
