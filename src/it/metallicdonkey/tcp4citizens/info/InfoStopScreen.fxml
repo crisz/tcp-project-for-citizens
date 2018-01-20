@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -23,12 +24,14 @@
                   <Image url="@../../tcp/icons/logo.png" />
                </image>
             </ImageView>
-            <TableView fx:id="stops" layoutX="261.0" layoutY="103.0" prefHeight="350.0" prefWidth="300.0">
+            <TableView fx:id="stops" layoutX="39.0" layoutY="103.0" prefHeight="350.0" prefWidth="300.0">
               <columns>
                 <TableColumn fx:id="addressColumn" prefWidth="300.0" text="Indirizzo Fermata" />
               </columns>
             </TableView>
             <TextField fx:id="filter" layoutX="271.0" layoutY="65.0" prefWidth="280.0" />
+            <ListView fx:id="linesList" layoutX="408.0" layoutY="184.0" prefHeight="269.0" prefWidth="200.0" />
+            <Label layoutX="494.0" layoutY="157.0" text="Linee" />
          </children>
       </Pane>
    </children>

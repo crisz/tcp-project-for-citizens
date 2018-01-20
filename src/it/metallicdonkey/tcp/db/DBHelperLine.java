@@ -269,4 +269,20 @@ public class DBHelperLine {
 		}
 		return path;
 	}
+
+	public ObservableList<String> getLinesPassingBy(Stop s) throws SQLException{
+		List<String> outputList = new ArrayList<>(); 
+		int idStop = getIdStop(s.getAddress());
+		if (idStop == -1) {
+			throw new SQLException();
+		}
+		String query = "SELECT DISTINCT l.idLine FROM tcp.line l, line_has_stop ls " +
+				"WHERE l.idLine = ls.Line_idLine AND ls.Stop_idStop = "+ idStop+ ";";
+				
+		ResultSet result = dbm.executeQuery(query);
+		while(result.next()) {
+			outputList.add("LINEA " +result.getString(1));
+		}
+		return FXCollections.observableArrayList(outputList);
+	}
 }
