@@ -43,7 +43,7 @@ public class InfoPathCtrl {
 	ListView<String> linesList;
 	@FXML
 	ListView<String> pathList;
-	
+
 	private Timer timer;
 	private TimerTask timerTask;
 	
@@ -179,7 +179,7 @@ public class InfoPathCtrl {
 		// If it's all ok
 		return null;
 	}
-	
+
 	private void timerStart() {
 		timerTask = new TimerTask() {
 	  		@Override
@@ -191,12 +191,13 @@ public class InfoPathCtrl {
 					}
 				});
 	  			System.out.println("TIMER ELAPSED");
+
 	  		}
 	  	};
 		timer = new Timer();
 		timer.schedule(timerTask, DURATION * 1000);
 	}
-	
+
 
 	private void goHome(){
 		FXMLLoader loader = new FXMLLoader();

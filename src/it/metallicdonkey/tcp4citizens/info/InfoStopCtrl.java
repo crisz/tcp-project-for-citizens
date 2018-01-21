@@ -33,7 +33,7 @@ public class InfoStopCtrl {
 	@FXML
 	private TableColumn<StopDataModel, String> addressColumn;
 	@FXML
-	private ListView<String> linesList; 
+	private ListView<String> linesList;
 
 	private ObservableList<StopDataModel> data;
 	private Stop stop;
@@ -41,7 +41,7 @@ public class InfoStopCtrl {
 	private TimerTask timerTask;
 	private static final int DURATION = 30;
 
-	
+
 	@FXML
 	private void initialize() throws SQLException {
 		data = DBHelperLine.getInstance().getAllStops();
@@ -72,7 +72,7 @@ public class InfoStopCtrl {
 		sortedData.comparatorProperty().bind(stops.comparatorProperty());
 
 		stops.setItems(sortedData);
-		
+
 		stops.setRowFactory(tv -> {
 			TableRow<StopDataModel> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
@@ -82,12 +82,12 @@ public class InfoStopCtrl {
 				}
 			});
 			return row;
-			
+
 		});
 		
 		timerStart();
 	}
-	
+
 	public void showLines() {
 		try {
 			ObservableList<String> lines = DBHelperLine.getInstance().getLinesPassingBy(stop);
@@ -100,7 +100,7 @@ public class InfoStopCtrl {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void timerStart() {
 		timerTask = new TimerTask() {
 	  		@Override
@@ -132,8 +132,9 @@ public class InfoStopCtrl {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
+
 	}
-	
+
 	public void setMainApp(App mainApp) {
 		this.mainApp = mainApp;
 	}
