@@ -75,13 +75,7 @@ public class InfoPathCtrl {
 				pathList.setItems(FXCollections.observableArrayList("Nessun percorso"));
 			}
 
-			// Check if there's a single Line linking the Stops
-			else if(lines.get(0).getName().equals(lines.get(1).getName())) {
-				linesList.setItems(FXCollections.observableArrayList(lines.get(0).getName()));
-				String path = "LINEA: "+  lines.get(0).getName() + " DA: " + start.getAddress() + " A: " + end.getAddress();
-				pathList.setItems(FXCollections.observableArrayList(path));
-			}
-			else {	// Multi line path
+			else {
 				try {
 					ArrayList<String> path = new ArrayList<>();
 					ArrayList<String> linesArrayList = new ArrayList<>();
