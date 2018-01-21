@@ -2,6 +2,8 @@ package it.metallicdonkey.tcp4citizens.info;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import it.metallicdonkey.tcp.db.DBHelperLine;
 import it.metallicdonkey.tcp4citizens.App;
@@ -10,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -31,7 +34,11 @@ public class InfoLineCtrl {
 	private TableColumn<LineDataModel, String> startTerminalColumn;
 	@FXML
 	private TableColumn<LineDataModel, String> endTerminalColumn;
+	
 	ObservableList<LineDataModel> data;
+	private TimerTask timerTask;
+	private Timer timer;
+	
 	@FXML
 	private void initialize() throws SQLException {
 		data = DBHelperLine.getInstance().getAllLines();
@@ -66,11 +73,36 @@ public class InfoLineCtrl {
 	    sortedData.comparatorProperty().bind(lines.comparatorProperty());
 
 	  	lines.setItems(sortedData);
+	  	
+	  	timerStart();
 	}
 
-
+	
+	private void timerStart() {
+		timerTask = new TimerTask() {
+	  		@Override
+	  		public void run() {
+	  			goHome();
+	  			System.out.println("TIMER ELAPSED");
+	  			
+	  		}
+	  	};
+		timer = new Timer();
+		timer.schedule(timerTask, 15 * 1000);
+	}
+	
+	@FXML
+	private void timerReset() {
+		timerTask.cancel();
+		timer.cancel();
+		timerStart();
+	}
 
 	public void setMainApp(App mainApp) {
 		this.mainApp = mainApp;
+	}
+	
+	private void goHome() {
+		// TODO implement
 	}
 }

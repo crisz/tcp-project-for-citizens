@@ -2,7 +2,10 @@ package it.metallicdonkey.tcp4citizens.info;
 
 import java.awt.Event;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import it.metallicdonkey.tcp.db.DBHelperLine;
 import it.metallicdonkey.tcp.models.Stop;
@@ -33,6 +36,8 @@ public class InfoStopCtrl {
 
 	private ObservableList<StopDataModel> data;
 	private Stop stop;
+	private Timer timer;
+	private TimerTask timerTask;
 
 	
 	@FXML
@@ -90,6 +95,30 @@ public class InfoStopCtrl {
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void timerStart() {
+		timerTask = new TimerTask() {
+	  		@Override
+	  		public void run() {
+	  			goHome();
+	  			System.out.println("TIMER ELAPSED");
+	  			
+	  		}
+	  	};
+		timer = new Timer();
+		timer.schedule(timerTask, 15 * 1000);
+	}
+	
+	@FXML
+	private void timerReset() {
+		timerTask.cancel();
+		timer.cancel();
+		timerStart();
+	}
+	
+	private void goHome() {
+		// TODO implement
 	}
 	
 	public void setMainApp(App mainApp) {
