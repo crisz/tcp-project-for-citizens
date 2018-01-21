@@ -142,10 +142,10 @@ public class InfoPathCtrl {
 		}
 		boolean s1 = false, s2 = false, retval;
 		for(Stop s: allStops) {
-			if (s.getAddress().equals(start.getAddress())) {
+			if (s.getAddress().toLowerCase().equals(start.getAddress().toLowerCase())) {
 				s1 = true;
 			}
-			if(s.getAddress().equals(end.getAddress())) {
+			if(s.getAddress().toLowerCase().equals(end.getAddress().toLowerCase())) {
 				s2 = true;
 			}
 		}
