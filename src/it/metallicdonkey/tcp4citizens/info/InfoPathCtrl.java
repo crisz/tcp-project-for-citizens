@@ -3,6 +3,8 @@ package it.metallicdonkey.tcp4citizens.info;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 
@@ -36,6 +38,9 @@ public class InfoPathCtrl {
 	ListView<String> linesList;
 	@FXML
 	ListView<String> pathList;
+
+	private Timer timer;
+	private TimerTask timerTask;
 
 	@FXML
 	private void initialize() {
@@ -166,6 +171,30 @@ public class InfoPathCtrl {
 
 		// If it's all ok
 		return null;
+	}
+
+	private void timerStart() {
+		timerTask = new TimerTask() {
+	  		@Override
+	  		public void run() {
+	  			goHome();
+	  			System.out.println("TIMER ELAPSED");
+
+	  		}
+	  	};
+		timer = new Timer();
+		timer.schedule(timerTask, 15 * 1000);
+	}
+
+	@FXML
+	private void timerReset() {
+		timerTask.cancel();
+		timer.cancel();
+		timerStart();
+	}
+
+	private void goHome() {
+		// TODO implement
 	}
 
 

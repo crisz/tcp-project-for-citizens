@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.metallicdonkey.tcp4citizens.info.InfoLineCtrl">
+<AnchorPane onMouseClicked="#timerReset" onMousePressed="#timerReset" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.metallicdonkey.tcp4citizens.info.InfoLineCtrl">
    <children>
       <Pane prefHeight="500.0" prefWidth="870.0" style="-fx-background-color: #d3d8d8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -34,8 +34,10 @@
               </columns>
             </TableView>
             <Label layoutX="352.0" layoutY="376.0" text="Percorso della linea selezionata" />
-            <Label fx:id="path" layoutX="62.0" layoutY="396.0" maxHeight="90.0" maxWidth="750.0" wrapText="true" />
-            <Pane layoutX="62.0" layoutY="393.0" prefHeight="90.0" prefWidth="750.0" style="-fx-background-color: #ffffff;" />
+            <Pane layoutX="62.0" layoutY="393.0" prefHeight="90.0" prefWidth="750.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <Label fx:id="path" maxHeight="90.0" maxWidth="750.0" wrapText="true" />
+               </children></Pane>
          </children>
       </Pane>
    </children>

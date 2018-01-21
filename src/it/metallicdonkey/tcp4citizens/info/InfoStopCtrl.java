@@ -2,7 +2,10 @@ package it.metallicdonkey.tcp4citizens.info;
 
 import java.awt.Event;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import it.metallicdonkey.tcp.db.DBHelperLine;
 import it.metallicdonkey.tcp.models.Stop;
@@ -12,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -32,6 +36,8 @@ public class InfoStopCtrl {
 
 	private ObservableList<StopDataModel> data;
 	private Stop stop;
+	private Timer timer;
+	private TimerTask timerTask;
 
 
 	@FXML
@@ -82,13 +88,37 @@ public class InfoStopCtrl {
 		try {
 			ObservableList<String> lines = DBHelperLine.getInstance().getLinesPassingBy(stop);
 			if(lines.isEmpty()) {
-				lines = FXCollections.observableArrayList("Nessuna linea passante","per la fermata ",stop.getAddress());
+				linesList.setPlaceholder(new Label("Nessuna Linea"));
 			}
 			linesList.setItems(lines);
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void timerStart() {
+		timerTask = new TimerTask() {
+	  		@Override
+	  		public void run() {
+	  			goHome();
+	  			System.out.println("TIMER ELAPSED");
+
+	  		}
+	  	};
+		timer = new Timer();
+		timer.schedule(timerTask, 15 * 1000);
+	}
+
+	@FXML
+	private void timerReset() {
+		timerTask.cancel();
+		timer.cancel();
+		timerStart();
+	}
+
+	private void goHome() {
+		// TODO implement
 	}
 
 	public void setMainApp(App mainApp) {
