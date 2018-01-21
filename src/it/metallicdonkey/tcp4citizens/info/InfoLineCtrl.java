@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Callable;
 
 import it.metallicdonkey.tcp.db.DBHelperLine;
 import it.metallicdonkey.tcp4citizens.App;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -22,7 +24,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-public class InfoLineCtrl {
+public class InfoLineCtrl{
 	private App mainApp;
 	@FXML
 	private TableView<LineDataModel> lines;
@@ -38,6 +40,7 @@ public class InfoLineCtrl {
 	ObservableList<LineDataModel> data;
 	private TimerTask timerTask;
 	private Timer timer;
+	private static final int DURATION = 30;
 	
 	@FXML
 	private void initialize() throws SQLException {
@@ -82,27 +85,36 @@ public class InfoLineCtrl {
 		timerTask = new TimerTask() {
 	  		@Override
 	  		public void run() {
-	  			goHome();
+	  			Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						goHome();
+					}
+				});
 	  			System.out.println("TIMER ELAPSED");
-	  			
 	  		}
 	  	};
 		timer = new Timer();
-		timer.schedule(timerTask, 15 * 1000);
+		timer.schedule(timerTask, DURATION * 1000);
 	}
 	
-	@FXML
-	private void timerReset() {
-		timerTask.cancel();
-		timer.cancel();
-		timerStart();
-	}
-
 	public void setMainApp(App mainApp) {
 		this.mainApp = mainApp;
 	}
 	
-	private void goHome() {
-		// TODO implement
+	private void goHome(){
+		FXMLLoader loader = new FXMLLoader();
+		Scene scene;
+		try {
+			loader.setLocation(App.class.getResource("info/CitizenAreaScreen.fxml"));
+		    AnchorPane anchorPane = (AnchorPane) loader.load();
+		  	scene = new Scene(anchorPane);
+			mainApp.getPrimaryStage().setScene(scene);
+			CitizenAreaCtrl ctrl = loader.getController();
+			ctrl.setMainApp(mainApp);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

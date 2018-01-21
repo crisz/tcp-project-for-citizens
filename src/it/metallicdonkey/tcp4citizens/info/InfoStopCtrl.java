@@ -1,20 +1,20 @@
 package it.metallicdonkey.tcp4citizens.info;
 
-import java.awt.Event;
+import java.io.IOException;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import it.metallicdonkey.tcp.db.DBHelperLine;
 import it.metallicdonkey.tcp.models.Stop;
 import it.metallicdonkey.tcp4citizens.App;
-import javafx.collections.FXCollections;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
@@ -22,6 +22,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 
 public class InfoStopCtrl {
 	private App mainApp;
@@ -38,6 +39,7 @@ public class InfoStopCtrl {
 	private Stop stop;
 	private Timer timer;
 	private TimerTask timerTask;
+	private static final int DURATION = 30;
 
 	
 	@FXML
@@ -82,6 +84,8 @@ public class InfoStopCtrl {
 			return row;
 			
 		});
+		
+		timerStart();
 	}
 	
 	public void showLines() {
@@ -101,24 +105,33 @@ public class InfoStopCtrl {
 		timerTask = new TimerTask() {
 	  		@Override
 	  		public void run() {
-	  			goHome();
+	  			Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						goHome();
+					}
+				});
 	  			System.out.println("TIMER ELAPSED");
-	  			
 	  		}
 	  	};
 		timer = new Timer();
-		timer.schedule(timerTask, 15 * 1000);
+		timer.schedule(timerTask, DURATION * 1000);
 	}
 	
-	@FXML
-	private void timerReset() {
-		timerTask.cancel();
-		timer.cancel();
-		timerStart();
-	}
-	
-	private void goHome() {
-		// TODO implement
+	private void goHome(){
+		FXMLLoader loader = new FXMLLoader();
+		Scene scene;
+		try {
+			loader.setLocation(App.class.getResource("info/CitizenAreaScreen.fxml"));
+		    AnchorPane anchorPane = (AnchorPane) loader.load();
+		  	scene = new Scene(anchorPane);
+			mainApp.getPrimaryStage().setScene(scene);
+			CitizenAreaCtrl ctrl = loader.getController();
+			ctrl.setMainApp(mainApp);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void setMainApp(App mainApp) {
