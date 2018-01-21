@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -82,7 +83,7 @@ public class InfoStopCtrl {
 		try {
 			ObservableList<String> lines = DBHelperLine.getInstance().getLinesPassingBy(stop);
 			if(lines.isEmpty()) {
-				lines = FXCollections.observableArrayList("Nessuna linea passante","per la fermata ",stop.getAddress());
+				linesList.setPlaceholder(new Label("Nessuna Linea"));
 			}
 			linesList.setItems(lines);
 		}
