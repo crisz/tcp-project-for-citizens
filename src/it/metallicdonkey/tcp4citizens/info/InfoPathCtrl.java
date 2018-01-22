@@ -16,6 +16,8 @@ import it.metallicdonkey.tcp.models.Line;
 import it.metallicdonkey.tcp.models.Stop;
 import it.metallicdonkey.tcp4citizens.App;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,12 +48,82 @@ public class InfoPathCtrl {
 
 	private Timer timer;
 	private TimerTask timerTask;
+	private ArrayList<Line> allLines = null;
+	private ArrayList<Line> containsStart = new ArrayList<>();
+	private ArrayList<Line> containsEnd = new ArrayList<>();
 	
 	private static final int DURATION = 30;
 
 	@FXML
 	private void initialize() {
 		timerStart();
+		
+		
+		linesList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+	    @Override
+	    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+	    		String[] steps = newValue.split(" -> ");
+	    		Line line1 = null;
+	    		Line line2 = null;
+	    		for(int i=0; i<containsStart.size(); i++) {
+	    			if(containsStart.get(i).getName().equals(steps[0])) 
+	    				line1 = containsStart.get(i);
+	    		}
+	    		for(int i=0; i<containsEnd.size(); i++) {
+	    			if(containsEnd.get(i).getName().equals(steps[2])) 
+	    				line2 = containsEnd.get(i);
+	    		}
+	    		
+	    		ArrayList<String> path = new ArrayList<>();
+	    		
+	    		ArrayList<Stop> stops1 = line1.getAllStops();
+	    		ArrayList<Stop> stops2 = line2.getAllStops();
+	    		
+	    		
+	    		boolean inside = false;
+	    		path.add("Dirigiti verso la fermata "+startField.getText());
+	    		path.add("Sali sul bus "+steps[0]);
+	    		for(int i=0; i<stops1.size(); i++) {
+	    			if(stops1.get(i).getAddress().equals(steps[1])) {
+	    				break;
+	    			}
+	    			
+	    			if(inside) {
+	    				path.add("Fermata "+stops1.get(i).getAddress());	
+	    			}
+	    			
+	    			if(startField.getText().equals(stops1.get(i).getAddress())) {
+	    				inside = true;
+	    			}
+	    		}
+	    		
+	    		path.add("Scendi alla fermata "+steps[1]);
+	    		
+	    		path.add("Sali sul "+steps[2]);
+	    		
+	    		inside = false;
+	    		
+	    		for(int i=0; i<stops2.size(); i++) {
+	    			if(endField.getText().equals(stops2.get(i).getAddress())) {
+	    				break;
+	    			}
+	    			
+	    			if(inside) {
+	    				path.add("Fermata "+stops2.get(i).getAddress());
+	    			}
+	    			
+	    			if(stops2.get(i).getAddress().equals(steps[1])) {
+	    				inside = true;
+	    			}
+	    		}
+	    		
+	    		path.add("Scendi alla fermata "+endField.getText());
+	    		path.add("Sei arrivato a destinazione");
+	    		
+	    		pathList.setItems(FXCollections.observableArrayList(path));
+	    }
+	});
+		
 	}
 
 	@FXML
@@ -64,18 +136,15 @@ public class InfoPathCtrl {
 		 * 
 		 * Cristian test
 		 */
-		ArrayList<Line> allLines = null;
+
+		ArrayList<Stop> stops;
+		ArrayList<String[]> sequence = new ArrayList<>();
 		try {
 			allLines = DBHelperLine.getInstance().getAllLinesArray(null);
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
+			// TODO caduta di connessione
 			e1.printStackTrace();
 		}
-		
-		ArrayList<Line> containsStart = new ArrayList<>();
-		ArrayList<Line> containsEnd = new ArrayList<>();
-		ArrayList<Stop> stops;
-		ArrayList<String[]> sequence = new ArrayList<>();
 		
 		for(int i=0; i<allLines.size(); i++) {
 			stops = allLines.get(i).getAllStops();
@@ -106,20 +175,9 @@ public class InfoPathCtrl {
 							break;
 						}
 					}
-//					if(startStops.contains(endStops.get(k))) {
-//
-//					}
 				}
 			}
 		}
-		
-		System.out.println("Percorsi trovati: ");
-		for(int i=0; i<sequence.size(); i++) {
-			String[] seq = sequence.get(i);
-			System.out.println(seq[0] + " -> " +seq[2] +" -> " + seq[1]);
-		}
-		
-		
 		
 		Alert error = check();
 
@@ -133,33 +191,6 @@ public class InfoPathCtrl {
 				pathList.setItems(FXCollections.observableArrayList("Nessun percorso"));
 			}
 			else {
-//				try {
-//					ArrayList<String> path = new ArrayList<>();
-//					ArrayList<String> linesArrayList = new ArrayList<>();
-//					for(Line l: lines) {
-//						linesArrayList.add(l.getName());
-//						Stop startStop = DBHelperLine.getInstance().getTerminal(l, true);
-//						ArrayList<Stop> stopsGoing = DBHelperLine.getInstance().getStops(l, true);
-//						ArrayList<Stop> stopsRet = DBHelperLine.getInstance().getStops(l, false);
-//						Stop endStop = DBHelperLine.getInstance().getTerminal(l, false);
-//						String stringa = ": ";
-//						stringa += startStop.getAddress().toUpperCase() + "; ";
-//						for(int i=0; i<stopsGoing.size(); i++) {
-//							stringa += stopsGoing.get(i).getAddress() + "; ";
-//						}
-//						stringa += endStop.getAddress().toUpperCase() + "; ";
-//						for(int i=0; i<stopsRet.size(); i++) {
-//							stringa += stopsRet.get(i).getAddress() + "; ";
-//						}
-//						stringa += startStop.getAddress().toUpperCase() + ".";
-//						path.add("LINEA " + l.getName() + stringa);
-//					}
-//					pathList.setItems(FXCollections.observableArrayList(path));
-//					linesList.setItems(FXCollections.observableArrayList(linesArrayList));
-//				} catch (SQLException exc) {
-//					exc.printStackTrace();
-//				}
-				
 				ArrayList<String> al = new ArrayList<>();
 				for(int i=0; i<sequence.size(); i++) {
 					al.add(sequence.get(i)[0] + " -> " +sequence.get(i)[2] +" -> " +sequence.get(i)[1]);
