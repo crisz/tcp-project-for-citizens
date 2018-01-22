@@ -197,6 +197,16 @@ public class InfoPathCtrl {
 		timer = new Timer();
 		timer.schedule(timerTask, DURATION * 1000);
 	}
+	
+	@FXML
+	private void onHomeClicked() {
+		// Stop timers
+		timerTask.cancel();
+		timer.cancel();
+		
+		// Go home
+		goHome();
+	}
 
 
 	private void goHome(){

@@ -119,6 +119,16 @@ public class InfoLineCtrl{
 		this.mainApp = mainApp;
 	}
 	
+	@FXML
+	private void onHomeClicked() {
+		// Stop timers
+		timerTask.cancel();
+		timer.cancel();
+		
+		// Go home
+		goHome();
+	}
+	
 	private void goHome(){
 		FXMLLoader loader = new FXMLLoader();
 		Scene scene;
