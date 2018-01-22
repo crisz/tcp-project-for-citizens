@@ -15,6 +15,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -80,6 +81,8 @@ public class InfoLineCtrl{
 	    sortedData.comparatorProperty().bind(lines.comparatorProperty());
 
 	  	lines.setItems(sortedData);
+	  	
+	  	path.setAlignment(Pos.CENTER);
 
 	  	lines.setRowFactory(tv -> {
 			TableRow<LineDataModel> row = new TableRow<>();
