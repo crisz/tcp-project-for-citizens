@@ -292,6 +292,7 @@ public class InfoPathCtrl {
 	}
 
 	private void timerStart() {
+		System.out.println("TIMER STARTED");
 		timerTask = new TimerTask() {
 	  		@Override
 	  		public void run() {
@@ -302,7 +303,6 @@ public class InfoPathCtrl {
 					}
 				});
 	  			System.out.println("TIMER ELAPSED");
-
 	  		}
 	  	};
 		timer = new Timer();
@@ -314,6 +314,9 @@ public class InfoPathCtrl {
 		// Stop timers
 		timerTask.cancel();
 		timer.cancel();
+		timer.purge();
+		
+		System.out.println("TIMER STOPPED");
 		
 		// Go home
 		goHome();
