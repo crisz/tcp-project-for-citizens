@@ -55,6 +55,15 @@ public class Line {
 		this.priority = priority;
 	}
 	
+	public ArrayList<Stop> getAllStops() {
+		ArrayList<Stop> allStops = new ArrayList<>();
+		allStops.add(startTerminal);
+		allStops.addAll(goingStops);
+		allStops.add(endTerminal);
+		allStops.addAll(returnStops);
+		return allStops;
+	}
+	
 	@Override
 	public String toString() {
 		return name;

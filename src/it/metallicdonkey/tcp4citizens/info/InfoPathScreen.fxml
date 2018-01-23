@@ -18,21 +18,21 @@
                <font>
                   <Font size="20.0" />
                </font></Label>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="696.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="130.0" fitWidth="137.0" layoutX="709.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../tcp/icons/logo.png" />
                </image>
             </ImageView>
-            <Label layoutX="14.0" layoutY="82.0" text="Partenza" />
-            <TextField fx:id="startField" layoutX="95.0" layoutY="78.0" />
+            <Label layoutX="28.0" layoutY="83.0" text="Partenza" />
+            <TextField fx:id="startField" layoutX="95.0" layoutY="78.0" prefHeight="27.0" prefWidth="204.0" />
             <Label layoutX="338.0" layoutY="82.0" text="Arrivo" />
-            <TextField fx:id="endField" layoutX="419.0" layoutY="78.0" />
-            <ListView fx:id="linesList" layoutX="111.0" layoutY="224.0" prefHeight="200.0" prefWidth="115.0" />
-            <Label layoutX="131.0" layoutY="174.0" text="Linee possibili" />
-            <ListView fx:id="pathList" layoutX="354.0" layoutY="224.0" prefHeight="200.0" prefWidth="278.0" />
-            <Label layoutX="449.0" layoutY="174.0" text="Percorsi possibili" />
-            <Button layoutX="593.0" layoutY="78.0" mnemonicParsing="false" onAction="#onCalcClicked" text="Calcola" />
-            <Button layoutX="410.0" layoutY="461.0" mnemonicParsing="false" onAction="#onHomeClicked" text="Home" />
+            <TextField fx:id="endField" layoutX="383.0" layoutY="78.0" prefHeight="27.0" prefWidth="204.0" />
+            <ListView fx:id="linesList" layoutX="40.0" layoutY="165.0" prefHeight="265.0" prefWidth="221.0" />
+            <Label layoutX="93.0" layoutY="138.0" text="Linee o combinazioni" />
+            <ListView fx:id="pathList" layoutX="354.0" layoutY="166.0" prefHeight="258.0" prefWidth="485.0" />
+            <Label layoutX="572.0" layoutY="138.0" text="Dettagli" />
+            <Button layoutX="605.0" layoutY="78.0" mnemonicParsing="false" onAction="#onCalcClicked" prefHeight="27.0" prefWidth="84.0" text="Calcola" />
+            <Button layoutX="313.0" layoutY="446.0" mnemonicParsing="false" onAction="#onHomeClicked" prefHeight="40.0" prefWidth="245.0" text="Home" />
          </children>
       </Pane>
    </children>
