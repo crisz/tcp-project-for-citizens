@@ -126,21 +126,20 @@ public class InfoPathCtrl {
 	    		else {
 	    			inside = false;
 		    		for(int i=0; i<stops1.size(); i++) {
-		    			
-		    			if(startField.getText().equals(startField.getText())) {
-		    				inside = true;
+		    			if(stops1.get(i).getAddress().equals(endField.getText())) {
+		    				break;
 		    			}
 		    			
 		    			if(inside) {
 		    				path.add("Fermata "+stops1.get(i).getAddress());	
 		    			}
-		    			
-		    			if(stops1.get(i).getAddress().equals(endField.getText())) {
-		    				break;
+
+		    			if(startField.getText().equals(startField.getText())) {
+		    				inside = true;
 		    			}
-		    			
 		    		}
 	    		}
+	    		path.add("Scendi alla fermata "+endField.getText());
 	    		path.add("Sei arrivato a destinazione");
 	    		
 	    		pathList.setItems(FXCollections.observableArrayList(path));
