@@ -3,13 +3,8 @@ package it.metallicdonkey.tcp4citizens.info;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
-
-import com.mysql.fabric.jdbc.ErrorReportingExceptionInterceptor;
 
 import it.metallicdonkey.tcp.db.DBHelperLine;
 import it.metallicdonkey.tcp.models.Line;
@@ -52,7 +47,7 @@ public class InfoPathCtrl {
 	private ArrayList<Line> containsStart = new ArrayList<>();
 	private ArrayList<Line> containsEnd = new ArrayList<>();
 	
-	private static final int DURATION = 30;
+	private static final int DURATION = 300;
 
 	@FXML
 	private void initialize() {

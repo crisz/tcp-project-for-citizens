@@ -39,7 +39,7 @@ public class InfoStopCtrl {
 	private Stop stop;
 	private Timer timer;
 	private TimerTask timerTask;
-	private static final int DURATION = 30;
+	private static final int DURATION = 300;
 
 
 	@FXML

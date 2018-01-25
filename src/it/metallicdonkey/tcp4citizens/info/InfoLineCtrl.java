@@ -45,7 +45,7 @@ public class InfoLineCtrl{
 	ObservableList<LineDataModel> data;
 	private TimerTask timerTask;
 	private Timer timer;
-	private static final int DURATION = 30;
+	private static final int DURATION = 300;
 	
 	@FXML
 	private void initialize() throws SQLException {
