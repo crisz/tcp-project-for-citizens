@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -33,12 +34,9 @@
               </columns>
             </TableView>
             <Label layoutX="352.0" layoutY="360.0" text="Percorso della linea selezionata" />
-            <Pane layoutX="62.0" layoutY="384.0" prefHeight="45.0" prefWidth="750.0" style="-fx-background-color: #ffffff;">
-               <children>
-                  <Label fx:id="path" layoutX="14.0" layoutY="14.0" maxHeight="90.0" maxWidth="750.0" wrapText="true" />
-               </children></Pane>
             <Label layoutX="139.0" layoutY="82.0" text="Filtra" />
             <Button layoutX="413.0" layoutY="461.0" mnemonicParsing="false" onAction="#onHomeClicked" text="Home" />
+            <TextArea fx:id="path" layoutX="62.0" layoutY="377.0" prefHeight="81.0" prefWidth="750.0" />
          </children>
       </Pane>
    </children>

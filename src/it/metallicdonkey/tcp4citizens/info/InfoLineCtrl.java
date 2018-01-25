@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -40,7 +41,7 @@ public class InfoLineCtrl{
 	private TableColumn<LineDataModel, String> endTerminalColumn;
 	private Line line;
 	@FXML
-	private Label path;
+	private TextArea path;
 	
 	ObservableList<LineDataModel> data;
 	private TimerTask timerTask;
@@ -81,8 +82,7 @@ public class InfoLineCtrl{
 	    sortedData.comparatorProperty().bind(lines.comparatorProperty());
 
 	  	lines.setItems(sortedData);
-	  	
-	  	path.setAlignment(Pos.CENTER);
+	  	path.setEditable(false);
 
 	  	lines.setRowFactory(tv -> {
 			TableRow<LineDataModel> row = new TableRow<>();
