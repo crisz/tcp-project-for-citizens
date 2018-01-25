@@ -6,9 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.metallicdonkey.tcp.models.Check;
 import it.metallicdonkey.tcp.models.Line;
-import it.metallicdonkey.tcp.models.Match;
 import it.metallicdonkey.tcp.models.Stop;
 import it.metallicdonkey.tcp4citizens.info.LineDataModel;
 import it.metallicdonkey.tcp4citizens.info.StopDataModel;

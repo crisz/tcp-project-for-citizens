@@ -1,6 +1,5 @@
 package it.metallicdonkey.tcp4citizens.info;
 
-import it.metallicdonkey.tcp.models.Line;
 import it.metallicdonkey.tcp.models.Stop;
 import javafx.beans.property.SimpleStringProperty;
 

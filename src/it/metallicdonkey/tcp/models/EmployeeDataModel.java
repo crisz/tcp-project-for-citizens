@@ -2,8 +2,6 @@ package it.metallicdonkey.tcp.models;
 
 import it.metallicdonkey.tcp.models.Employee;
 
-import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
-
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 
