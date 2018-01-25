@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.metallicdonkey.tcp4citizens.info.InfoLineCtrl">
+   <children>
+      <Pane prefHeight="500.0" prefWidth="870.0" style="-fx-background-color: #d3d8d8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" layoutX="353.0" layoutY="27.0" text="Seleziona una linea">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="713.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../tcp/icons/logo.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="filter" layoutX="187.0" layoutY="68.0" prefHeight="45.0" prefWidth="500.0" />
+            <TableView fx:id="lines" layoutX="62.0" layoutY="157.0" prefHeight="190.0" prefWidth="750.0">
+              <columns>
+                <TableColumn fx:id="nameColumn" prefWidth="150.0" text="Linea" />
+                <TableColumn fx:id="startTerminalColumn" prefWidth="300.0" text="Capolinea di Partenza" />
+                  <TableColumn fx:id="endTerminalColumn" prefWidth="300.0" text="Capolinea di Arrivo" />
+              </columns>
+            </TableView>
+            <Label layoutX="352.0" layoutY="360.0" text="Percorso della linea selezionata" />
+            <Label layoutX="139.0" layoutY="82.0" text="Filtra" />
+            <Button layoutX="413.0" layoutY="461.0" mnemonicParsing="false" onAction="#onHomeClicked" text="Home" />
+            <TextArea fx:id="path" layoutX="62.0" layoutY="377.0" prefHeight="81.0" prefWidth="750.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

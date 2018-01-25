@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.metallicdonkey.tcp4citizens.info.CitizenAreaCtrl">
+   <children>
+      <Pane prefHeight="500.0" prefWidth="870.0" style="-fx-background-color: #d3d8d8;">
+         <children>
+            <Button alignment="CENTER" contentDisplay="TOP" layoutX="26.0" layoutY="165.0" mnemonicParsing="false" onAction="#showInfoLine" prefHeight="199.0" prefWidth="240.0" style="-fx-background-color: white; -fx-border-width: 5px; -fx-border-color: black;" text="Info linea" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <graphic>
+                  <ImageView fitHeight="149.0" fitWidth="194.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../tcp/icons/il.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></Button>
+            <Label alignment="CENTER" layoutX="347.0" layoutY="179.0" text="Seleziona un'attività">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <Button alignment="CENTER" contentDisplay="TOP" layoutX="315.0" layoutY="250.0" mnemonicParsing="false" onAction="#showInfoPath" prefHeight="199.0" prefWidth="240.0" style="-fx-background-color: white; -fx-border-width: 5px; -fx-border-color: black;" text="Info percorso" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <graphic>
+                  <ImageView fitHeight="135.0" fitWidth="198.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../tcp/icons/ip.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="TOP" layoutX="602.0" layoutY="165.0" mnemonicParsing="false" onAction="#showInfoStop" prefHeight="199.0" prefWidth="240.0" style="-fx-background-color: white; -fx-border-width: 5px; -fx-border-color: black;" text="Info fermata" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <graphic>
+                  <ImageView fitHeight="146.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../tcp/icons/if.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="360.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../tcp/icons/logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

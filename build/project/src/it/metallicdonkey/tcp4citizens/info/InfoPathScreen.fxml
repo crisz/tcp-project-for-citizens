@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.metallicdonkey.tcp4citizens.info.InfoPathCtrl">
+   <children>
+      <Pane prefHeight="500.0" prefWidth="870.0" style="-fx-background-color: #d3d8d8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" layoutX="338.0" layoutY="24.0" text="Informazioni percorso">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <ImageView fitHeight="130.0" fitWidth="137.0" layoutX="709.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../tcp/icons/logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="28.0" layoutY="83.0" text="Partenza" />
+            <TextField fx:id="startField" layoutX="95.0" layoutY="78.0" prefHeight="27.0" prefWidth="204.0" />
+            <Label layoutX="338.0" layoutY="82.0" text="Arrivo" />
+            <TextField fx:id="endField" layoutX="383.0" layoutY="78.0" prefHeight="27.0" prefWidth="204.0" />
+            <ListView fx:id="linesList" layoutX="40.0" layoutY="165.0" prefHeight="265.0" prefWidth="221.0" />
+            <Label layoutX="93.0" layoutY="138.0" text="Linee o combinazioni" />
+            <ListView fx:id="pathList" layoutX="354.0" layoutY="166.0" prefHeight="258.0" prefWidth="485.0" />
+            <Label layoutX="572.0" layoutY="138.0" text="Dettagli" />
+            <Button layoutX="605.0" layoutY="78.0" mnemonicParsing="false" onAction="#onCalcClicked" prefHeight="27.0" prefWidth="84.0" text="Calcola" />
+            <Button layoutX="313.0" layoutY="446.0" mnemonicParsing="false" onAction="#onHomeClicked" prefHeight="40.0" prefWidth="245.0" text="Home" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
