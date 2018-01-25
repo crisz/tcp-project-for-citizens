@@ -3,6 +3,10 @@ package it.metallicdonkey.tcp4citizens.info;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.ListIterator;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,6 +18,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -223,6 +228,7 @@ public class InfoPathCtrl {
 			}
 			linesList.refresh();
 			pathList.refresh();
+			removeDuplicates();
 
 		}
 		else {
@@ -333,7 +339,18 @@ public class InfoPathCtrl {
 		}
 	}
 
-
+	private void removeDuplicates() {
+		/* 	Duplicates can be easily removed, by adding the entire list 
+		*	to a Set, that by default, doesn't allow repeated elements
+		*/
+		Set<String> set = new LinkedHashSet<>(linesList.getItems());
+		// Clear the linesList
+		linesList.getItems().clear();
+		// Re-populate the list
+		linesList.getItems().addAll(set);
+		
+		
+	}
 
 	public void setMainApp(App mainApp) {
 	  this.mainApp = mainApp;

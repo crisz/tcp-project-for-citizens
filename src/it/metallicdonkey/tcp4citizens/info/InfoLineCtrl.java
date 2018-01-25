@@ -153,7 +153,6 @@ public class InfoLineCtrl{
 			ArrayList<Stop> stopsGoing = DBHelperLine.getInstance().getStops(line, true);
 			ArrayList<Stop> stopsRet = DBHelperLine.getInstance().getStops(line, false);
 			Stop endStop = DBHelperLine.getInstance().getTerminal(line, false);
-			System.out.println(stopsGoing.get(0));
 			String stringa = "Linea "+line.getName()+": ";
 			stringa += startStop.getAddress().toUpperCase() + "; ";
 			for(int i=0; i<stopsGoing.size(); i++) {
