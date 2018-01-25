@@ -93,11 +93,11 @@ public class DBHelperLine {
 			if(going == true) {
 				dbm.executeQuery("SELECT s.idStop, s.Address FROM stop s, line_has_stop ls, line l " +
 						"WHERE s.idStop=ls.Stop_idStop AND l.idLine='" + line.getName() +
-						"' AND l.idLine=ls.Line_idLine AND ls.type = 'GOING'");
+						"' AND l.idLine=ls.Line_idLine AND ls.type = 'GOING' ORDER BY sequenceNumber");
 			} else {
 				dbm.executeQuery("SELECT s.idStop, s.Address FROM stop s, line_has_stop ls, line l " +
 						"WHERE s.idStop=ls.Stop_idStop AND l.idLine='" + line.getName() +
-						"' AND l.idLine=ls.Line_idLine AND ls.type='RETURN'");
+						"' AND l.idLine=ls.Line_idLine AND ls.type='RETURN' ORDER BY sequenceNumber");
 			}
 			ResultSet resultSet = dbm.getResultSet();
 			resultSet.beforeFirst();
